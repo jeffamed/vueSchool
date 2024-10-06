@@ -25,9 +25,11 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'time_zone' => fake()->randomElement(["CET", "CST", "GMT+1"]),
             'remember_token' => Str::random(10),
         ];
     }
