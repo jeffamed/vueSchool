@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserThirdApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::put('users-third-api', UserThirdApiController::class)->name('update-user-by-api');
