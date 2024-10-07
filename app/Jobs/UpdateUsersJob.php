@@ -17,7 +17,7 @@ class UpdateUsersJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public int $startBach, public int $endBatch)
+    public function __construct(public int $startBach, public int $limit)
     {}
 
     /**
@@ -25,6 +25,6 @@ class UpdateUsersJob implements ShouldQueue
      */
     public function handle(): void
     {
-        (new UserService())->updateUserByBatch($this->startBach, $this->endBatch);
+        (new UserService())->updateUserByBatch($this->startBach, $this->limit);
     }
 }

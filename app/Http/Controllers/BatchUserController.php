@@ -17,8 +17,8 @@ class BatchUserController extends Controller
         $totalRecords = User::count();
         $jobs = [];
 
-        for ($i = 1; $i <= $totalRecords; $i += $batchSize) {
-            $jobs[] = new UpdateUsersJob($i, $i + $batchSize - 1);
+        for ($i = 0; $i <= $totalRecords; $i += $batchSize) {
+            $jobs[] = new UpdateUsersJob($i, $batchSize);
         }
 
         \Bus::batch($jobs)

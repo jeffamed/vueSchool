@@ -33,12 +33,15 @@ class UserService
      * @param int $end
      * @return void
      */
-    public function updateUserByBatch(int $start, int $end): void
+    public function updateUserByBatch(int $start, int $limit): void
     {
-        $users = User::whereBetween('id', [$start, $end])->get();
+        $users = User::select('email', 'name', 'time_zone')->offset($start)->take($limit)->get();
         $route_batch = $this->BASE_ROUTE_API . "/users/batch";
         $token = "";
-        $response = Http::withToken($token)->post($route_batch, $users);
+        $data = [
+            "subcribers" => $users
+        ];
+        $response = Http::withToken($token)->post($route_batch, $data);
         if ($response->successful()) {
             $users = $response->json();
             foreach ($users as $user) {
